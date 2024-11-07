@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa con Varios Marcadores</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Mapa con múltiples marcadores</h1>
+    <div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        // Crear el mapa y centrarlo en una ubicación inicial
+        var map = L.map('map').setView([40.7128, -74.0060], 13); // Nueva York
+
+        // Añadir la capa de OpenStreetMap
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Añadir marcadores para diferentes ciudades
+        var locations = [
+            {lat: 40.7128, lon: -74.0060, title: 'Nueva York'}, // Nueva York
+            {lat: 48.8566, lon: 2.3522, title: 'París'},         // París
+            {lat: 51.5074, lon: -0.1278, title: 'Londres'},      // Londres
+            {lat: 34.0522, lon: -118.2437, title: 'Los Ángeles'} // Los Ángeles
+        ];
+
+        // Crear un marcador por cada ciudad
+        locations.forEach(function(location) {
+            L.marker([location.lat, location.lon])
+                .addTo(map)
+                .bindPopup(location.title);
+        });
+    </script>
+</body>
+</html>
